@@ -14,14 +14,13 @@ def detect_faces(image_path):
     # Ищем лица на изображении
     faces = face_cascade.detectMultiScale(gray, 1.1, 4)
 
-    # Рисуем прямоугольники вокруг найденных лиц
-    for (x, y, w, h) in faces:
-        cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)
-
-    # Отображаем результат
-    # Вместо cv2.imshow('img', img)
-    cv2.imwrite('output.jpg', img)
-    print("Изображение с распознанными лицами сохранено как output.jpg")
+    # Проверяем, найдены ли лица
+    if len(faces) == 0:
+        print("Лица не найдены.")
+    else:
+        print(f"Найдено {len(faces)} лицо(ев):")
+        for (x, y, w, h) in faces:
+            print(f"Лицо найдено на координатах X:{x} Y:{y} ширина:{w} высота:{h}")
 
 if __name__ == '__main__':
     # Получаем путь до изображения
